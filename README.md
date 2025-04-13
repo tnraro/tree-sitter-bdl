@@ -1,6 +1,6 @@
 # tree-sitter-bdl
 
-[bdl](https://github.com/disjukr/bdl/) grammer for [tree-sitter](https://github.com/tree-sitter/tree-sitter).
+[bdl](https://github.com/disjukr/bdl/) grammar for [tree-sitter](https://github.com/tree-sitter/tree-sitter).
 
 References
 
