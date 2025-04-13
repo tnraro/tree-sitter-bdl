@@ -485,6 +485,11 @@
     }
   },
   {
+    "type": "type_expression_array",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "type_expression_dictionary",
     "named": true,
     "fields": {
@@ -671,10 +676,6 @@
   {
     "type": "throws",
     "named": false
-  },
-  {
-    "type": "type_expression_array",
-    "named": true
   },
   {
     "type": "union",

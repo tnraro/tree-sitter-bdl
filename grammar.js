@@ -48,7 +48,7 @@ module.exports = grammar({
         field("name", $.identifier),
         optional(choice($.type_expression_array, $.type_expression_dictionary)),
       ),
-    type_expression_array: _ => token.immediate("[]"),
+    type_expression_array: _ => seq(token.immediate("["), token.immediate("]")),
     type_expression_dictionary: $ =>
       seq(
         token.immediate("["),
@@ -112,7 +112,8 @@ module.exports = grammar({
     enum_element: $ => seq(field("name", $.identifier), optional(",")),
     union: $ =>
       seq("union", field("name", $.identifier), field("body", $.union_body)),
-    union_body: $ => seq("{", repeat(choice($.attribute, $.union_element)), "}"),
+    union_body: $ =>
+      seq("{", repeat(choice($.attribute, $.union_element)), "}"),
     union_element: $ =>
       seq(
         field("name", $.identifier),
@@ -121,7 +122,8 @@ module.exports = grammar({
       ),
     oneof: $ =>
       seq("oneof", field("name", $.identifier), field("body", $.oneof_body)),
-    oneof_body: $ => seq("{", repeat(choice($.attribute, $.oneof_element)), "}"),
+    oneof_body: $ =>
+      seq("{", repeat(choice($.attribute, $.oneof_element)), "}"),
     oneof_element: $ => seq($.type_expression, optional(",")),
     custom: $ =>
       seq(
