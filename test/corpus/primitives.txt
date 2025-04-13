@@ -1,0 +1,108 @@
+================================================================================
+Comment
+================================================================================
+//
+// Only single-line comments are allowed
+---
+(source_file
+  (comment)
+  (comment))
+
+================================================================================
+Identifier
+================================================================================
+# abc
+# Abc
+# abc_123
+# _abc
+---
+(source_file
+  (attribute
+    (identifier))
+  (attribute
+    (identifier))
+  (attribute
+    (identifier))
+  (attribute
+    (identifier)))
+
+
+================================================================================
+Empty Attribute
+================================================================================
+# foo
+@ bar
+---
+(source_file
+  (attribute
+    name: (identifier))
+  (attribute
+    name: (identifier)))
+
+================================================================================
+Single-line Attribute
+================================================================================
+# standard - conventional
+@ http - GET /hello
+@ blabla - // 이것도 blabla 애트리뷰트 내용의 일부여야 함
+---
+(source_file
+  (attribute
+    name: (identifier)
+    text: (attribute_text
+      (attribute_content)))
+  (attribute
+    name: (identifier)
+    text: (attribute_text
+      (attribute_content)))
+  (attribute
+    name: (identifier)
+    text: (attribute_text
+      (attribute_content))))
+
+================================================================================
+Multi-line Attribute
+================================================================================
+@ description
+| Multi-line text
+| can be included.
+@ blabla  // this is a comment
+| lorem   // not a comment
+| lorem   // not a comment
+---
+(source_file
+  (attribute
+    name: (identifier)
+    text: (attribute_text
+      (attribute_content)
+      (attribute_content)))
+  (attribute
+    name: (identifier)
+    (comment)
+    text: (attribute_text
+      (attribute_content)
+      (attribute_content))))
+
+================================================================================
+Type Expression
+================================================================================
+custom plain = integer
+custom array = integer[]
+custom dictionary = integer[string]
+---
+(source_file
+  (custom
+    name: (identifier)
+    type: (type_expression
+      name: (identifier)))
+  (custom
+    name: (identifier)
+    type: (type_expression
+      name: (identifier)
+      (type_expression_array)))
+  (custom
+    name: (identifier)
+    type: (type_expression
+      name: (identifier)
+      (type_expression_dictionary
+        key: (identifier)))))

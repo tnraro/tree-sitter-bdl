@@ -1,0 +1,215 @@
+================================================================================
+Empty String
+================================================================================
+
+---
+(source_file)
+
+================================================================================
+Import
+================================================================================
+import pkg.dir.mod {
+  TheirStruct,
+  TheirEnum as MyEnum, // Import alias
+}
+import .pkg.dir.mod {
+  TheirStruct
+  TheirEnum as MyEnum
+}
+---
+(source_file
+  (import
+    path: (import_path
+      (identifier)
+      (identifier)
+      (identifier))
+    body: (import_body
+      (import_field
+        name: (identifier))
+      (import_field
+        name: (identifier)
+        alias: (identifier))
+      (comment)))
+  (import
+    path: (import_path
+      (identifier)
+      (identifier)
+      (identifier))
+    body: (import_body
+      (import_field
+        name: (identifier))
+      (import_field
+        name: (identifier)
+        alias: (identifier)))))
+
+================================================================================
+Proc
+================================================================================
+proc GetHello = GetHelloReq -> GetHelloRes
+proc GetHello = GetHelloReq -> GetHelloRes throws GetHelloErr
+---
+(source_file
+  (proc
+    name: (identifier)
+    input: (type_expression
+      name: (identifier))
+    output: (type_expression
+      name: (identifier)))
+  (proc
+    name: (identifier)
+    input: (type_expression
+      name: (identifier))
+    output: (type_expression
+      name: (identifier))
+    throws: (type_expression
+      name: (identifier))))
+
+================================================================================
+Struct
+================================================================================
+struct Struct {}
+struct MyStruct {
+  foo: integer,
+  bar?: string, // `?` means the field is optional
+  baz: integer[]
+  qux: string
+}
+---
+(source_file
+  (struct
+    name: (identifier)
+    body: (struct_body))
+  (struct
+    name: (identifier)
+    body: (struct_body
+      (struct_field
+        key: (identifier)
+        type: (type_expression
+          name: (identifier)))
+      (struct_field
+        key: (identifier)
+        optional: (struct_field_optional_type)
+        type: (type_expression
+          name: (identifier)))
+      (comment)
+      (struct_field
+        key: (identifier)
+        type: (type_expression
+          name: (identifier)
+          (type_expression_array)))
+      (struct_field
+        key: (identifier)
+        type: (type_expression
+          name: (identifier)))
+          )))
+
+
+================================================================================
+Enum
+================================================================================
+enum Foo {}
+enum MyEnum {
+  FOO,
+  BAR
+  @ foo - bar
+  BAZ
+}
+---
+(source_file
+  (enum
+    name: (identifier)
+    body: (enum_body))
+  (enum
+    name: (identifier)
+    body: (enum_body
+      (enum_element
+        name: (identifier))
+      (enum_element
+        name: (identifier))
+      (attribute
+        name: (identifier)
+        text: (attribute_text
+          (attribute_content)))
+      (enum_element
+        name: (identifier)))))
+
+================================================================================
+Union
+================================================================================
+union Foo {}
+union MyUnion {
+  Foo, // If there are no fields, parentheses can be omitted
+  Bar()
+  Baz(
+    foo: integer,
+    bar?: string
+  )
+}
+---
+(source_file
+  (union
+    name: (identifier)
+    body: (union_body))
+  (union
+    name: (identifier)
+    body: (union_body
+      (union_element
+        name: (identifier))
+      (comment)
+      (union_element
+        name: (identifier))
+      (union_element
+        name: (identifier)
+        (struct_field
+          key: (identifier)
+          type: (type_expression
+            name: (identifier)))
+        (struct_field
+          key: (identifier)
+          optional: (struct_field_optional_type)
+          type: (type_expression
+            name: (identifier)))))))
+
+================================================================================
+Oneof
+================================================================================
+oneof Oneof {}
+oneof MyOneof {
+  @ foo
+  | bar
+  boolean
+  integer
+  string,
+}
+---
+(source_file
+  (oneof
+    name: (identifier)
+    body: (oneof_body))
+  (oneof
+    name: (identifier)
+    body: (oneof_body
+      (attribute
+        name: (identifier)
+        text: (attribute_text
+          (attribute_content)))
+      (oneof_element
+        (type_expression
+          name: (identifier)))
+      (oneof_element
+        (type_expression
+          name: (identifier)))
+      (oneof_element
+        (type_expression
+          name: (identifier))))))
+
+================================================================================
+Custom
+================================================================================
+custom MyString = string
+---
+(source_file
+  (custom
+    name: (identifier)
+    type: (type_expression
+      name: (identifier))))

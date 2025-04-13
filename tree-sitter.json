@@ -1,0 +1,39 @@
+{
+  "$schema": "https://tree-sitter.github.io/tree-sitter/assets/schemas/config.schema.json",
+  "grammars": [
+    {
+      "name": "bdl",
+      "camelcase": "bdl",
+      "title": "bdl",
+      "scope": "source.bdl",
+      "file-types": [
+        "bdl"
+      ],
+      "injection-regex": "^bdl$",
+      "class-name": "TreeSitterBdl"
+    }
+  ],
+  "metadata": {
+    "version": "0.1.0",
+    "license": "MIT",
+    "description": "Bridge Definition Language",
+    "authors": [
+      {
+        "name": "tnraro",
+        "email": "deokji53@gmail.com"
+      }
+    ],
+    "links": {
+      "repository": "https://github.com/tnraro/tree-sitter-bdl"
+    }
+  },
+  "bindings": {
+    "c": true,
+    "go": true,
+    "node": true,
+    "python": true,
+    "rust": true,
+    "swift": true,
+    "zig": false
+  }
+}
