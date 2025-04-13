@@ -1,0 +1,114 @@
+// see https://github.com/disjukr/bdl/blob/main/docs/syntax.md for more details
+// <- comment
+
+// c style one liner comment. no multiline comment support
+// <- comment
+
+# inner_attribute_1
+// <- keyword
+// ^ attribute
+
+# inner_attribute_2 - one liner contents
+// <- keyword
+// ^ attribute
+//                  ^ operator
+//                    ^ string
+
+# inner_attribute_3
+| any multiline
+| contents here
+// ^ string
+
+@ outer_attribute_1
+@ outer_attribute_2 - also can have contents
+import bdl.dependency { MyDep, MyDep2 as Blabla }
+
+custom MyCustomType = string
+// <- keyword
+//     ^ type
+//                  ^ operator
+//                    ^ type
+
+custom MyCustomType2 = string[MyEnum]
+// <- keyword
+//     ^ type
+//                   ^ operator
+//                     ^ type
+//                           ^ punctuation.bracket
+//                            ^ type
+//                                  ^ punctuation.bracket
+
+// union of symbols
+enum MyEnum {
+// <- keyword
+//     ^ type
+//          ^ punctuation.bracket
+  ITEM1,
+  // ^ constant
+  //   ^ punctuation.delimiter
+  ITEM2,
+  // ^ constant
+}
+// <- punctuation.bracket
+
+// tagged union
+union MyUnion {
+// <- keyword
+//     ^ type
+  Foo,
+//^ constant
+  Bar(baz: string),
+//^ constant
+//    ^ property
+//       ^ punctuation.delimiter
+//         ^ type
+}
+
+// untagged union.
+// for compatibility with openapi, protobuf, etc.
+// please use a tagged union if possible.
+oneof MyOneof {
+// <- keyword
+//     ^ type
+  MyType1,
+//     ^ type
+  MyType2[],
+//     ^ type
+//       ^ punctuation.bracket
+//        ^ punctuation.bracket
+}
+
+struct MyStruct {
+// <- keyword
+//     ^ type
+  foo: boolean,
+//  ^ property
+//   ^ punctuation.delimiter
+//     ^ type
+  baz?: string,
+//^ property
+//   ^ punctuation.delimiter
+//    ^ punctuation.delimiter
+//      ^ type
+  qux: string[],
+  quux: number[string], // e.g. { "foo": 0, "bar": 1, ... }
+  corge: boolean[MyEnum], // e.g. { "ITEM1": true, "ITEM2": false }
+}
+
+proc MyProcedure = RequestType -> ResponseType
+// <- keyword
+//     ^ type
+//               ^ operator
+//                 ^ type
+//                             ^ operator
+//                                ^ type
+
+proc MyProcedureWithError = RequestType -> ResponseType throws MyError
+// <- keyword
+//     ^ type
+//                        ^ operator
+//                          ^ type
+//                                      ^ operator
+//                                         ^ type
+//                                                      ^ keyword
+//                                                             ^ type

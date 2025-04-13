@@ -6,11 +6,10 @@
       "camelcase": "bdl",
       "title": "bdl",
       "scope": "source.bdl",
-      "file-types": [
-        "bdl"
-      ],
+      "file-types": ["bdl"],
       "injection-regex": "^bdl$",
-      "class-name": "TreeSitterBdl"
+      "class-name": "TreeSitterBdl",
+      "highlights": ["queries/highlights.scm"]
     }
   ],
   "metadata": {
